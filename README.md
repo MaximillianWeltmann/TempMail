@@ -1,22 +1,21 @@
-# Geçici E-posta Uygulaması
+# NOVA MAIL - Geçici E-posta Servisi
 
-Bu proje, mail.tm API'sini kullanarak oluşturulmuş, modern ve kullanıcı dostu bir geçici e-posta servisidir. Kullanıcılar anında ücretsiz e-posta adresleri oluşturabilir ve bunları kayıt formları, deneme sürümleri veya istenmeyen e-postaları önlemek için kullanabilirler.
+Bu proje, kullanıcıların hızlıca geçici e-posta adresleri oluşturabileceği, gerçek zamanlı olarak gelen e-postaları görüntüleyebileceği modern bir web uygulamasıdır.
 
 ## Özellikler
 
-- 🚀 Anında e-posta oluşturma
-- 📨 Gerçek zamanlı e-posta alımı
-- 🔍 E-posta içeriklerini görüntüleme
-- 🗑️ Mesajları ve hesapları silme
-- 📱 Mobil uyumlu duyarlı tasarım
-- 🔄 Otomatik mesaj yenileme
+- 🚀 Hızlı e-posta adresi oluşturma
+- 📊 Gerçek zamanlı istatistikler
+- 🔒 Güvenli ve gizlilik odaklı
+- ✨ Modern ve kullanıcı dostu arayüz
+- 📱 Tüm cihazlara uyumlu tasarım
 
 ## Teknolojiler
 
 - React.js
 - Tailwind CSS
-- mail.tm API
-- Axios
+- mail.tm API entegrasyonu
+- Framer Motion animasyonları
 
 ## Kurulum
 
@@ -40,15 +39,13 @@ Tarayıcınızda `http://localhost:3000` adresini açarak uygulamayı görüntü
 
 ## Kullanım
 
-1. Ana sayfada, rastgele bir kullanıcı adı oluşturabilir veya kendiniz bir kullanıcı adı belirleyebilirsiniz
-2. "E-posta Oluştur" düğmesine tıklayarak hesabınızı oluşturun
-3. Gelen kutunuz otomatik olarak e-postaları kontrol edecektir
-4. Herhangi bir e-postaya tıklayarak içeriğini görüntüleyebilirsiniz
-5. İşiniz bittiğinde, hesabınızı silmek için "Hesabı Sil" düğmesini kullanabilirsiniz
+1. Ana sayfadan e-posta adresi oluşturun
+2. Gelen kutunuzu kontrol edin
+3. Gelen e-postaları görüntüleyin
 
 ## Lisans
 
-MIT
+Bu proje MIT Lisansı ile lisanslanmıştır.
 
 ## İletişim
 
