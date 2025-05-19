@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA MAIL - Gelen Kutusu</title>
+  <!-- CSS dosyaları -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="futuristic-layout">
+    <!-- Sol Kenar Çubuğu -->
+    <aside class="futuristic-navbar">
+      <div class="futuristic-logo">
+        <div class="flex flex-col items-center space-y-1">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl" style="box-shadow: 0 0 15px rgba(99,102,241,0.5);">
+            <i class="fas fa-rocket h-7 w-7 text-white animate-pulse"></i>
+          </div>
+          <span class="text-xl font-bold futuristic-text-gradient">NOVA MAIL</span>
+        </div>
+      </div>
+      
+      <nav class="mt-8 px-2">
+        <a href="inbox.html">
+          <div class="futuristic-nav-item active">
+            <i class="fas fa-envelope futuristic-nav-icon"></i>
+            <span>Gelen Kutusu</span>
+          </div>
+        </a>
+        
+        <div class="futuristic-nav-item" id="refreshBtn">
+          <i class="fas fa-sync-alt futuristic-nav-icon"></i>
+          <span>Yenile</span>
+        </div>
+        
+        <a href="signup.html" id="newMailBtn">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-plus futuristic-nav-icon"></i>
+            <span>Yeni E-posta</span>
+          </div>
+        </a>
+      </nav>
+      
+      <div class="mt-auto mb-6 px-6">
+        <div class="futuristic-card p-4 animate-fade-in">
+          <div class="text-xs text-gray-400 mb-2 flex flex-col">
+            <div class="flex items-center justify-between mb-1">
+              <span>E-posta:</span>
+              <span class="futuristic-badge" id="emailCounter">0</span>
+            </div>
+          </div>
+          <div class="futuristic-divider"></div>
+          <div class="text-center text-xs text-indigo-400 mt-2">
+            <a href="https://mail.tm" target="_blank" class="hover:text-indigo-300">Mail.tm API</a> ile çalışır
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Ana İçerik -->
+    <main class="futuristic-content">
+      <!-- Üst Bar -->
+      <div class="futuristic-header">
+        <div class="flex items-center space-x-3">
+          <div class="text-sm font-medium bg-black/20 rounded-md px-3 py-1.5 border border-indigo-500/20" id="userEmail">
+            mail@mail.tm
+          </div>
+          <button id="copyEmailBtn" class="futuristic-badge cursor-pointer" title="E-posta adresini kopyala">
+            <i class="fas fa-copy w-3 h-3 mr-1"></i> Kopyala
+          </button>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button class="futuristic-icon-button" title="Tema Değiştir">
+            <i class="fas fa-moon w-4 h-4"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" id="deleteAllBtn" title="Tüm Mesajları Sil">
+            <i class="fas fa-trash w-4 h-4"></i>
+          </button>
+          
+          <a href="signup.html" class="futuristic-icon-button" title="Yeni E-posta">
+            <i class="fas fa-plus w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- İçerik Alanı - Gelen Kutusu -->
+      <div class="flex-1 overflow-auto p-6">
+        <div class="futuristic-panel">
+          <h2 class="text-2xl font-bold text-white mb-6">Gelen Kutusu</h2>
+          
+          <!-- Yükleniyor Göstergesi -->
+          <div id="loadingIndicator" class="text-center p-10">
+            <div class="inline-block w-8 h-8 border-2 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
+            <p class="text-gray-400">Mesajlar yükleniyor...</p>
+          </div>
+          
+          <!-- Mesaj listesi -->
+          <div class="space-y-4" id="messagesList">
+            <!-- Mesajlar JS ile eklenecek -->
+          </div>
+          
+          <!-- Boş mesaj durumu -->
+          <div id="emptyInbox" class="text-center py-10 hidden">
+            <div class="bg-black/30 inline-flex rounded-full p-4 mb-4">
+              <i class="fas fa-inbox text-gray-500 text-4xl"></i>
+            </div>
+            <p class="text-gray-400 text-lg">Gelen kutunuz boş</p>
+            <p class="text-gray-500 text-sm mt-2">Henüz hiç mesajınız bulunmuyor</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Mesaj İçeriği Modalı -->
+    <div id="messageModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-gray-900/90 border border-indigo-500/20 rounded-lg max-w-3xl w-full max-h-[80vh] flex flex-col">
+        <div class="border-b border-indigo-500/20 p-4 flex justify-between items-center">
+          <h3 class="text-lg font-medium text-white" id="modalSubject">Konu</h3>
+          <button id="closeModal" class="text-gray-400 hover:text-white">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="p-4 border-b border-indigo-500/20">
+          <div class="flex justify-between text-sm text-gray-400 mb-2">
+            <div>
+              <span class="font-medium text-white">Gönderen:</span> 
+              <span id="modalFrom">sender@example.com</span>
+            </div>
+            <div id="modalDate">01.01.2023 12:34</div>
+          </div>
+          <div class="text-sm text-gray-400 mb-4">
+            <span class="font-medium text-white">Alıcı:</span> 
+            <span id="modalTo">recipient@example.com</span>
+          </div>
+        </div>
+        
+        <div class="p-4 flex-1 overflow-auto">
+          <div id="modalBody" class="text-white prose prose-invert max-w-none">
+            <!-- Mesaj içeriği burada gösterilecek -->
+          </div>
+        </div>
+        
+        <div class="border-t border-indigo-500/20 p-4 flex justify-end">
+          <button id="modalDelete" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded">
+            <i class="fas fa-trash mr-2"></i> Sil
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript dosyaları -->
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // DOM elementleri
+      const userEmailEl = document.getElementById('userEmail');
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const refreshBtn = document.getElementById('refreshBtn');
+      const messagesList = document.getElementById('messagesList');
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const emptyInbox = document.getElementById('emptyInbox');
+      const emailCounter = document.getElementById('emailCounter');
+      const deleteAllBtn = document.getElementById('deleteAllBtn');
+      
+      // Modal elementleri
+      const messageModal = document.getElementById('messageModal');
+      const closeModal = document.getElementById('closeModal');
+      const modalSubject = document.getElementById('modalSubject');
+      const modalFrom = document.getElementById('modalFrom');
+      const modalTo = document.getElementById('modalTo');
+      const modalDate = document.getElementById('modalDate');
+      const modalBody = document.getElementById('modalBody');
+      const modalDelete = document.getElementById('modalDelete');
+      
+      // Oturum kontrolü ve mail bilgilerini alma
+      const accountData = checkSession();
+      
+      if (!accountData) {
+        window.location.href = 'signup.html';
+        return;
+      }
+      
+      // E-posta adresini göster
+      userEmailEl.textContent = accountData.address;
+      
+      // E-posta adresini kopyalama
+      copyEmailBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(accountData.address).then(function() {
+          showNotification('E-posta adresi kopyalandı!', 'success');
+        }).catch(function(err) {
+          showNotification('Kopyalama hatası: ' + err, 'error');
+        });
+      });
+      
+      // Yenile butonuna tıklandığında
+      refreshBtn.addEventListener('click', function() {
+        fetchDemoMessages();
+      });
+      
+      // Tüm mesajları sil
+      deleteAllBtn.addEventListener('click', function() {
+        if (confirm('Tüm mesajları silmek istediğinize emin misiniz?')) {
+          clearMessages();
+        }
+      });
+      
+      // Modal kapatma
+      closeModal.addEventListener('click', function() {
+        messageModal.classList.add('hidden');
+      });
+      
+      // Modaldaki sil butonu
+      modalDelete.addEventListener('click', function() {
+        const messageId = modalDelete.dataset.messageId;
+        if (messageId) {
+          deleteMessage(messageId);
+          messageModal.classList.add('hidden');
+          fetchDemoMessages();
+        }
+      });
+      
+      // Sayfa dışı tıklama ile modalı kapatma
+      window.addEventListener('click', function(e) {
+        if (e.target === messageModal) {
+          messageModal.classList.add('hidden');
+        }
+      });
+      
+      // Escape tuşu ile modalı kapatma
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !messageModal.classList.contains('hidden')) {
+          messageModal.classList.add('hidden');
+        }
+      });
+      
+      // Oturum kontrolü
+      function checkSession() {
+        const accountData = localStorage.getItem('novamail_account');
+        if (!accountData) {
+          return null;
+        }
+        return JSON.parse(accountData);
+      }
+      
+      // Demo mesajları getir
+      function fetchDemoMessages() {
+        showLoading(true);
+        
+        // Demo mesajları localStorage'dan al veya oluştur
+        setTimeout(() => {
+          const messages = getDemoMessages();
+          emailCounter.textContent = messages.length;
+          renderMessages(messages);
+          showLoading(false);
+        }, 800); // Gerçekçi yükleme hissi için biraz bekle
+      }
+      
+      // Demo mesajları al veya oluştur
+      function getDemoMessages() {
+        // localStorage'dan kayıtlı mesajları al
+        let messages = localStorage.getItem('novamail_messages');
+        
+        if (messages) {
+          return JSON.parse(messages);
+        }
+        
+        // Sadece tek bir hoşgeldiniz mesajı
+        const demoMessages = [
+          {
+            id: 'msg_welcome',
+            from: { name: 'NOVA MAIL Ekibi', address: 'no-reply@nova-mail.com' },
+            to: [{ address: accountData.address }],
+            subject: 'Hoşgeldiniz',
+            text: 'Merhaba,\n\nNOVA MAIL geçici e-posta hesabınıza hoşgeldiniz. Bu hesabı kullanarak spam ve gereksiz e-postalardan kurtulabilirsiniz.\n\nTeşekkürler,\nNOVA MAIL Ekibi',
+            html: '<div style="font-family: Arial, sans-serif; padding: 20px;"><h2 style="color: #4f46e5;">Hoşgeldiniz</h2><p>Merhaba,</p><p>NOVA MAIL geçici e-posta hesabınıza hoşgeldiniz. Bu hesabı kullanarak spam ve gereksiz e-postalardan kurtulabilirsiniz.</p><p>Teşekkürler,<br>NOVA MAIL Ekibi</p></div>',
+            createdAt: new Date().toISOString(),
+            seen: false
+          }
+        ];
+        
+        // Demo mesajları localStorage'a kaydet
+        localStorage.setItem('novamail_messages', JSON.stringify(demoMessages));
+        
+        return demoMessages;
+      }
+      
+      // Mesajları ekrana bas
+      function renderMessages(messages) {
+        messagesList.innerHTML = '';
+        
+        if (messages.length === 0) {
+          emptyInbox.classList.remove('hidden');
+          return;
+        }
+        
+        emptyInbox.classList.add('hidden');
+        
+        messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        
+        messages.forEach(message => {
+          const messageDate = new Date(message.createdAt);
+          const formattedDate = formatDate(messageDate);
+          
+          const isUnread = !message.seen;
+          const messageEl = document.createElement('div');
+          messageEl.className = `futuristic-card p-4 hover:bg-indigo-900/10 cursor-pointer ${isUnread ? 'border-l-4 border-indigo-500' : ''}`;
+          messageEl.innerHTML = `
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium text-indigo-300">${message.subject || 'Konu Yok'}</p>
+                <p class="text-sm text-gray-400">${message.from.address}</p>
+              </div>
+              <div class="text-xs text-gray-500">${formattedDate}</div>
+            </div>
+            <p class="text-sm text-gray-400 mt-2 line-clamp-2">${getMessage(message)}</p>
+          `;
+          
+          // Mesaja tıklandığında detayları göster
+          messageEl.addEventListener('click', () => {
+            showMessageDetails(message.id);
+          });
+          
+          messagesList.appendChild(messageEl);
+        });
+      }
+      
+      // Mesaj içeriğini al
+      function getMessage(message) {
+        if (message.text) {
+          return message.text.substring(0, 150) + (message.text.length > 150 ? '...' : '');
+        } else if (message.html) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = message.html;
+          const text = tempDiv.textContent || tempDiv.innerText || '';
+          return text.substring(0, 150) + (text.length > 150 ? '...' : '');
+        }
+        return 'Mesaj içeriği yok';
+      }
+      
+      // Tarih formatla
+      function formatDate(date) {
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+          return `Bugün, ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        } else if (diffDays === 1) {
+          return `Dün, ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        } else if (diffDays < 7) {
+          return `${diffDays} gün önce`;
+        } else {
+          return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        }
+      }
+      
+      // Yükleniyor göstergesi
+      function showLoading(show) {
+        if (show) {
+          loadingIndicator.classList.remove('hidden');
+          messagesList.classList.add('hidden');
+          emptyInbox.classList.add('hidden');
+        } else {
+          loadingIndicator.classList.add('hidden');
+          messagesList.classList.remove('hidden');
+        }
+      }
+      
+      // Mesaj detaylarını göster
+      function showMessageDetails(messageId) {
+        try {
+          showNotification('Mesaj yükleniyor...', 'info');
+          
+          // Mesajı bul
+          const messages = JSON.parse(localStorage.getItem('novamail_messages') || '[]');
+          const message = messages.find(m => m.id === messageId);
+          
+          if (!message) {
+            throw new Error('Mesaj bulunamadı!');
+          }
+          
+          // Modal içeriğini doldur
+          modalSubject.textContent = message.subject || 'Konu Yok';
+          modalFrom.textContent = message.from.address;
+          modalTo.textContent = message.to[0].address;
+          modalDate.textContent = new Date(message.createdAt).toLocaleString();
+          
+          if (message.html) {
+            // HTML içeriğini temizle ve güvenli hale getir
+            const sanitizedHtml = message.html
+              .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+              .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+              .replace(/<link\b[^<]*(?:(?!<\/link>)<[^<]*)*<\/link>/gi, '')
+              .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+              .replace(/on\w+="[^"]*"/g, '');
+            
+            modalBody.innerHTML = sanitizedHtml;
+          } else if (message.text) {
+            modalBody.innerHTML = `<pre style="white-space: pre-wrap;">${message.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
+          } else {
+            modalBody.textContent = 'Mesaj içeriği yok';
+          }
+          
+          // Silme işlemi için mesaj ID'sini sakla
+          modalDelete.dataset.messageId = messageId;
+          
+          // Modalı göster
+          messageModal.classList.remove('hidden');
+          
+          // Mesajı okundu olarak işaretle
+          if (!message.seen) {
+            markMessageAsSeen(messageId);
+          }
+        } catch (error) {
+          console.error('Mesaj detayı alma hatası:', error);
+          showNotification('Mesaj detayı alınamadı: ' + error.message, 'error');
+        }
+      }
+      
+      // Mesajı okundu olarak işaretle
+      function markMessageAsSeen(messageId) {
+        try {
+          const messages = JSON.parse(localStorage.getItem('novamail_messages') || '[]');
+          const messageIndex = messages.findIndex(m => m.id === messageId);
+          
+          if (messageIndex !== -1) {
+            messages[messageIndex].seen = true;
+            localStorage.setItem('novamail_messages', JSON.stringify(messages));
+            fetchDemoMessages();
+          }
+        } catch (error) {
+          console.error('Mesajı okundu işaretleme hatası:', error);
+        }
+      }
+      
+      // Mesajı sil
+      function deleteMessage(messageId) {
+        try {
+          showNotification('Mesaj siliniyor...', 'info');
+          
+          const messages = JSON.parse(localStorage.getItem('novamail_messages') || '[]');
+          const newMessages = messages.filter(m => m.id !== messageId);
+          
+          localStorage.setItem('novamail_messages', JSON.stringify(newMessages));
+          
+          showNotification('Mesaj başarıyla silindi', 'success');
+          fetchDemoMessages();
+        } catch (error) {
+          console.error('Mesaj silme hatası:', error);
+          showNotification('Mesaj silinemedi: ' + error.message, 'error');
+        }
+      }
+      
+      // Tüm mesajları sil
+      function clearMessages() {
+        try {
+          showLoading(true);
+          showNotification('Tüm mesajlar siliniyor...', 'info');
+          
+          localStorage.setItem('novamail_messages', JSON.stringify([]));
+          
+          showNotification('Tüm mesajlar başarıyla silindi', 'success');
+          fetchDemoMessages();
+        } catch (error) {
+          console.error('Tüm mesajları silme hatası:', error);
+          showNotification('Mesajlar silinemedi: ' + error.message, 'error');
+        }
+      }
+      
+      // Bildirim gösterme
+      function showNotification(message, type) {
+        // Global showNotification fonksiyonu zaten script.js'de tanımlı
+        if (window.showNotification) {
+          window.showNotification(message, type);
+        } else {
+          console.log(message);
+        }
+      }
+      
+      // Sayfa yüklendiğinde mesajları getir
+      fetchDemoMessages();
+    });
+  </script>
+</body>
+</html> 

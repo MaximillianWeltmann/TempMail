@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA MAIL - İstatistikler</title>
+  <!-- CSS dosyaları -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="futuristic-layout">
+    <!-- Sol Kenar Çubuğu -->
+    <aside class="futuristic-navbar">
+      <div class="futuristic-logo">
+        <div class="flex flex-col items-center space-y-1">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl" style="box-shadow: 0 0 15px rgba(99,102,241,0.5);">
+            <i class="fas fa-rocket h-7 w-7 text-white animate-pulse"></i>
+          </div>
+          <span class="text-xl font-bold futuristic-text-gradient">NOVA MAIL</span>
+        </div>
+      </div>
+      
+      <nav class="mt-8 px-2">
+        <a href="inbox.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-envelope futuristic-nav-icon"></i>
+            <span>Gelen Kutusu</span>
+          </div>
+        </a>
+        
+        <a href="profile.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-user-astronaut futuristic-nav-icon"></i>
+            <span>Profil</span>
+          </div>
+        </a>
+
+        <a href="explore.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-globe futuristic-nav-icon"></i>
+            <span>Keşfet</span>
+          </div>
+        </a>
+
+        <a href="statistics.html">
+          <div class="futuristic-nav-item active">
+            <i class="fas fa-chart-bar futuristic-nav-icon"></i>
+            <span>İstatistikler</span>
+          </div>
+        </a>
+
+        <a href="notifications.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-bell futuristic-nav-icon"></i>
+            <span>Bildirimler</span>
+          </div>
+        </a>
+
+        <a href="settings.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-cog futuristic-nav-icon"></i>
+            <span>Ayarlar</span>
+          </div>
+        </a>
+      </nav>
+      
+      <div class="mt-auto mb-6 px-6">
+        <div class="futuristic-card p-4 animate-fade-in">
+          <div class="text-xs text-gray-400 mb-2 flex flex-col">
+            <div class="flex items-center justify-between mb-1">
+              <span>Depolama:</span>
+              <span class="futuristic-badge">0 B / 40 MB</span>
+            </div>
+            <div class="w-full bg-black/30 rounded-full h-1.5 mt-1">
+              <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full" style="width: 2%;"></div>
+            </div>
+          </div>
+          <div class="futuristic-divider"></div>
+          <div class="text-center text-xs text-indigo-400 mt-2">
+            © NOVA MAIL 2023
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Ana İçerik -->
+    <main class="futuristic-content">
+      <!-- Üst Bar -->
+      <div class="futuristic-header">
+        <div class="flex items-center space-x-3">
+          <div class="text-sm font-medium bg-black/20 rounded-md px-3 py-1.5 border border-indigo-500/20">
+            kullanici@nova-mail.com
+          </div>
+          <div class="futuristic-badge">
+            <i class="fas fa-rocket w-3 h-3 mr-1"></i> Premium
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button class="futuristic-icon-button" title="Yenile" id="refreshButton">
+            <i class="fas fa-sync-alt w-4 h-4 hover:rotate-180 transition-transform duration-500"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Tema Değiştir">
+            <i class="fas fa-moon w-4 h-4"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Hesabı Sil">
+            <i class="fas fa-trash w-4 h-4"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Çıkış">
+            <i class="fas fa-sign-out-alt w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- İçerik Alanı - İstatistikler -->
+      <div class="flex-1 overflow-auto p-6">
+        <div class="futuristic-panel">
+          <h1 class="text-2xl font-bold mb-6 futuristic-text-gradient">İstatistikler</h1>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Gelen Mesaj İstatistiği -->
+            <div class="futuristic-card p-4 animate-slide-in">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-gray-400">Gelen Mesajlar</span>
+                <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center">
+                  <i class="fas fa-envelope text-indigo-400"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-2xl font-bold text-white" id="total-messages">5</span>
+                <span class="text-sm text-green-400 ml-2" id="today-messages">+2 bugün</span>
+              </div>
+              <div class="w-full bg-black/30 rounded-full h-1.5 mt-3">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full" id="messages-progress" style="width: 40%;"></div>
+              </div>
+            </div>
+            
+            <!-- Depolama İstatistiği -->
+            <div class="futuristic-card p-4 animate-slide-in" style="animation-delay: 0.1s;">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-gray-400">Depolama Kullanımı</span>
+                <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center">
+                  <i class="fas fa-database text-indigo-400"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-2xl font-bold text-white" id="storage-used">0.8 MB</span>
+                <span class="text-sm text-gray-400 ml-2">/ 40 MB</span>
+              </div>
+              <div class="w-full bg-black/30 rounded-full h-1.5 mt-3">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full" id="storage-progress" style="width: 2%;"></div>
+              </div>
+            </div>
+            
+            <!-- Hesap Süresi İstatistiği -->
+            <div class="futuristic-card p-4 animate-slide-in" style="animation-delay: 0.2s;">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-gray-400">Hesap Süresi</span>
+                <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center">
+                  <i class="fas fa-hourglass-half text-indigo-400"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-2xl font-bold text-white" id="account-time">21 saat</span>
+                <span class="text-sm text-red-400 ml-2" id="time-remaining">3 saat kaldı</span>
+              </div>
+              <div class="w-full bg-black/30 rounded-full h-1.5 mt-3">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full" id="time-progress" style="width: 87%;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Ayrıntılı İstatistikler -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Aktivite Grafiği -->
+            <div class="futuristic-card p-6 animate-slide-up">
+              <h2 class="text-xl font-bold text-indigo-400 mb-4">Aktivite Grafiği</h2>
+              <div class="h-60 flex items-end justify-between space-x-2">
+                <div class="w-full flex items-end justify-between">
+                  <div class="flex flex-col items-center">
+                    <div class="h-12 w-8 rounded-t-md bg-indigo-900/40 border-t border-x border-indigo-500/20"></div>
+                    <span class="text-xs text-gray-500 mt-2">Pzt</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-20 w-8 rounded-t-md bg-indigo-900/40 border-t border-x border-indigo-500/20"></div>
+                    <span class="text-xs text-gray-500 mt-2">Sal</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-16 w-8 rounded-t-md bg-indigo-900/40 border-t border-x border-indigo-500/20"></div>
+                    <span class="text-xs text-gray-500 mt-2">Çar</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-32 w-8 rounded-t-md bg-indigo-900/40 border-t border-x border-indigo-500/20"></div>
+                    <span class="text-xs text-gray-500 mt-2">Per</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-24 w-8 rounded-t-md bg-indigo-900/40 border-t border-x border-indigo-500/20"></div>
+                    <span class="text-xs text-gray-500 mt-2">Cum</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-36 w-8 rounded-t-md bg-gradient-to-t from-indigo-700 to-purple-600 border-t border-x border-indigo-500/40"></div>
+                    <span class="text-xs text-indigo-400 mt-2">Cmt</span>
+                  </div>
+                  <div class="flex flex-col items-center">
+                    <div class="h-44 w-8 rounded-t-md bg-gradient-to-t from-indigo-700 to-purple-600 border-t border-x border-indigo-500/40"></div>
+                    <span class="text-xs text-indigo-400 mt-2">Paz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mesaj Dağılımı -->
+            <div class="futuristic-card p-6 animate-slide-up" style="animation-delay: 0.1s;">
+              <h2 class="text-xl font-bold text-indigo-400 mb-4">Mesaj Dağılımı</h2>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm text-gray-400">Hoşgeldin</span>
+                    <span class="text-sm text-gray-400">1</span>
+                  </div>
+                  <div class="w-full bg-black/30 rounded-full h-2">
+                    <div class="bg-indigo-600 h-2 rounded-full" style="width: 20%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm text-gray-400">Doğrulama</span>
+                    <span class="text-sm text-gray-400">1</span>
+                  </div>
+                  <div class="w-full bg-black/30 rounded-full h-2">
+                    <div class="bg-purple-600 h-2 rounded-full" style="width: 20%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm text-gray-400">Teklif</span>
+                    <span class="text-sm text-gray-400">1</span>
+                  </div>
+                  <div class="w-full bg-black/30 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width: 20%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm text-gray-400">Abonelik</span>
+                    <span class="text-sm text-gray-400">1</span>
+                  </div>
+                  <div class="w-full bg-black/30 rounded-full h-2">
+                    <div class="bg-green-600 h-2 rounded-full" style="width: 20%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm text-gray-400">Güvenlik</span>
+                    <span class="text-sm text-gray-400">1</span>
+                  </div>
+                  <div class="w-full bg-black/30 rounded-full h-2">
+                    <div class="bg-red-600 h-2 rounded-full" style="width: 20%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript dosyaları -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Kullanıcı bilgilerini localStorage'dan al
+      const account = JSON.parse(localStorage.getItem('novamail_account') || '{}');
+      const userEmail = account.address || 'kullanici@nova-mail.com';
+      
+      // E-posta görünen yerleri güncelle
+      document.querySelectorAll('.text-sm.font-medium.bg-black\\/20').forEach(element => {
+        element.textContent = userEmail;
+      });
+      
+      // Hesap oluşturma zamanını al
+      const createdAt = account.createdAt ? new Date(account.createdAt) : new Date();
+      const now = new Date();
+      
+      // Mesaj istatistikleri - localStorage'da kayıtlı mesaj sayısını kullan
+      let messagesData = JSON.parse(localStorage.getItem('novamail_messages') || '[]');
+      if (!Array.isArray(messagesData) || messagesData.length === 0) {
+        messagesData = [
+          { id: 'welcome', subject: 'Hoşgeldiniz', seen: true, createdAt: createdAt.toISOString() },
+          { id: 'security', subject: 'Güvenlik', seen: false, createdAt: now.toISOString() },
+          { id: 'promo', subject: 'Özel Teklif', seen: true, createdAt: new Date(now - 86400000).toISOString() },
+          { id: 'newsletter', subject: 'Bülten', seen: true, createdAt: new Date(now - 86400000).toISOString() },
+          { id: 'alert', subject: 'Uyarı', seen: false, createdAt: new Date(now - 172800000).toISOString() }
+        ];
+      }
+      
+      // Bugün gelen mesaj sayısı
+      const today = new Date().setHours(0, 0, 0, 0);
+      const todayMessages = messagesData.filter(msg => 
+        new Date(msg.createdAt).setHours(0, 0, 0, 0) === today
+      ).length;
+      
+      // Toplam mesaj sayısı
+      const totalMessages = messagesData.length;
+      
+      // İstatistikleri güncelle - Mesajlar
+      document.getElementById('total-messages').textContent = totalMessages;
+      document.getElementById('today-messages').textContent = 
+        todayMessages > 0 ? `+${todayMessages} bugün` : 'Bugün yeni mesaj yok';
+      document.getElementById('messages-progress').style.width = `${Math.min(100, totalMessages * 20)}%`;
+      
+      // Depolama hesaplama - varsayılan olarak her mesaj 160KB
+      const storageUsedBytes = totalMessages * 160 * 1024;
+      const storageUsedMB = (storageUsedBytes / (1024 * 1024)).toFixed(1);
+      const storagePercentage = (storageUsedBytes / (40 * 1024 * 1024) * 100).toFixed(1);
+      
+      // İstatistikleri güncelle - Depolama
+      document.getElementById('storage-used').textContent = `${storageUsedMB} MB`;
+      document.getElementById('storage-progress').style.width = `${storagePercentage}%`;
+      
+      // Hesap süresi hesaplama - varsayılan 24 saat
+      const accountAgeMs = now.getTime() - createdAt.getTime();
+      const accountAgeHours = Math.floor(accountAgeMs / (1000 * 60 * 60));
+      const remainingHours = Math.max(0, 24 - accountAgeHours);
+      const timePercentage = Math.min(100, (accountAgeHours / 24) * 100);
+      
+      // İstatistikleri güncelle - Hesap Süresi
+      document.getElementById('account-time').textContent = `${accountAgeHours} saat`;
+      document.getElementById('time-remaining').textContent = 
+        remainingHours > 0 ? `${remainingHours} saat kaldı` : 'Süre doldu';
+      document.getElementById('time-progress').style.width = `${timePercentage}%`;
+      
+      // Renk değişimi - süre azsa kırmızı yap
+      if (remainingHours < 6) {
+        document.getElementById('time-progress').style.background = 'linear-gradient(to right, #dc2626, #ef4444)';
+      }
+      
+      // Yenile butonuna tıklama işlevi
+      document.getElementById('refreshButton')?.addEventListener('click', function() {
+        // Animasyon efekti
+        this.querySelector('i').classList.add('animate-spin');
+        setTimeout(() => {
+          this.querySelector('i').classList.remove('animate-spin');
+          // Sayfayı yeniden yükle
+          location.reload();
+        }, 1000);
+      });
+      
+      // Çıkış butonuna tıklama işlevi
+      document.querySelector('[title="Çıkış"]')?.addEventListener('click', function() {
+        localStorage.removeItem('novamail_account');
+        window.location.href = 'signup.html';
+      });
+      
+      // Hesabı Sil butonuna tıklama işlevi
+      document.querySelector('[title="Hesabı Sil"]')?.addEventListener('click', function() {
+        if (confirm('Hesabınızı silmek istediğinize emin misiniz?')) {
+          localStorage.removeItem('novamail_account');
+          window.location.href = 'signup.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

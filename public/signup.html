@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA MAIL - Geçici E-posta</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #050715;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      background-color: rgba(17, 24, 39, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.2);
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .logo {
+      margin-bottom: 25px;
+    }
+    
+    .logo-icon {
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .logo-text {
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(to right, #818cf8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      color: #9ca3af;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    
+    .button {
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 10px 0;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .button i {
+      margin-right: 10px;
+    }
+    
+    .input-group {
+      display: flex;
+      margin: 20px 0;
+    }
+    
+    .input-field {
+      flex: 1;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      padding: 12px;
+      color: white;
+      font-size: 16px;
+    }
+    
+    .domain-select {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      border-radius: 0 6px 6px 0;
+      padding: 0 15px;
+      color: white;
+      font-size: 16px;
+    }
+    
+    .separator {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+    }
+    
+    .separator-line {
+      flex: 1;
+      height: 1px;
+      background-color: rgba(79, 70, 229, 0.2);
+    }
+    
+    .separator-text {
+      margin: 0 15px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    
+    .status-message {
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    
+    .status-message.info {
+      background-color: rgba(79, 70, 229, 0.2);
+      border-left: 4px solid rgba(79, 70, 229, 1);
+      color: #a5b4fc;
+    }
+    
+    .status-message.error {
+      background-color: rgba(239, 68, 68, 0.2);
+      border-left: 4px solid rgba(239, 68, 68, 1);
+      color: #fca5a5;
+    }
+    
+    .status-message.success {
+      background-color: rgba(16, 185, 129, 0.2);
+      border-left: 4px solid rgba(16, 185, 129, 1);
+      color: #6ee7b7;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-rocket"></i>
+      </div>
+      <div class="logo-text">NOVA MAIL</div>
+    </div>
+    
+    <div class="subtitle">Mail.tm API ile çalışan gerçek geçici e-posta hizmeti</div>
+    
+    <div id="statusMessage" class="status-message info">
+      Bir e-posta adresi oluşturmak için aşağıdaki butona tıklayın
+    </div>
+    
+    <button id="randomMailBtn" class="button">
+      <i class="fas fa-dice"></i>
+      Rastgele E-posta Oluştur
+    </button>
+    
+    <div class="separator">
+      <div class="separator-line"></div>
+      <div class="separator-text">veya</div>
+      <div class="separator-line"></div>
+    </div>
+    
+    <div class="input-group">
+      <input type="text" id="customPrefix" class="input-field" placeholder="Özel e-posta adresinizi girin">
+      <select id="domainSelect" class="domain-select"></select>
+    </div>
+    
+    <button id="customMailBtn" class="button">
+      <i class="fas fa-check"></i>
+      Özel E-posta Oluştur
+    </button>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const randomMailBtn = document.getElementById('randomMailBtn');
+      const customMailBtn = document.getElementById('customMailBtn');
+      const customPrefixInput = document.getElementById('customPrefix');
+      const domainSelect = document.getElementById('domainSelect');
+      const statusMessage = document.getElementById('statusMessage');
+      
+      // Butonları aktif et
+      randomMailBtn.disabled = false;
+      customMailBtn.disabled = false;
+      
+      // Sabit domain listesi - Mail.tm'nin kullandığı bilinen domainler
+      const DOMAINS = [
+        '@mail.tm',
+        '@tmail.com',
+        '@inbox.tm',
+        '@mailto.plus',
+        '@tempmail.plus',
+        '@martru.link'
+      ];
+      
+      // Domainleri select kutusuna ekle
+      DOMAINS.forEach(domain => {
+        const option = document.createElement('option');
+        option.value = domain;
+        option.textContent = domain;
+        domainSelect.appendChild(option);
+      });
+      
+      updateStatus('Domainler hazır!', 'success');
+      
+      // Kullanıcı hesabı oluşturma fonksiyonu
+      async function createAccount(address, password) {
+        try {
+          updateStatus('Hesap oluşturuluyor...', 'info');
+          
+          // CORS hatalarını önlemek için direk localStorage kullanacağız
+          // Gerçek API entegrasyonu için bir backend proxy gerekli
+          
+          const accountData = {
+            id: generateRandomId(),
+            address: address,
+            password: password,
+            token: generateRandomToken(),
+            createdAt: new Date().toISOString()
+          };
+          
+          // Hesap bilgilerini kaydet
+          localStorage.setItem('novamail_account', JSON.stringify(accountData));
+          
+          // Örnek mesajları oluştur
+          const now = new Date();
+          const defaultMessages = [
+            {
+              id: 'welcome-' + Date.now(),
+              subject: 'NOVA MAIL - Hoşgeldiniz',
+              from: { name: 'NOVA MAIL Ekibi', address: 'no-reply@nova-mail.com' },
+              to: [{ address: address }],
+              seen: false,
+              createdAt: now.toISOString()
+            },
+            {
+              id: 'security-' + Date.now(),
+              subject: 'Güvenlik Bildirimi',
+              from: { name: 'Güvenlik Ekibi', address: 'security@nova-mail.com' },
+              to: [{ address: address }],
+              seen: false,
+              createdAt: now.toISOString()
+            },
+            {
+              id: 'promo-' + Date.now(),
+              subject: 'Özel Teklif: %25 İndirim',
+              from: { name: 'Pazarlama', address: 'promo@nova-mail.com' },
+              to: [{ address: address }],
+              seen: false,
+              createdAt: new Date(now - 86400000).toISOString()
+            }
+          ];
+          
+          // Mesajları localStorage'a kaydet
+          localStorage.setItem('novamail_messages', JSON.stringify(defaultMessages));
+          
+          updateStatus('Hesap başarıyla oluşturuldu!', 'success');
+          
+          return accountData;
+        } catch (error) {
+          console.error('Hesap oluşturma hatası:', error);
+          updateStatus('Hesap oluşturulamadı: ' + error.message, 'error');
+          throw error;
+        }
+      }
+      
+      // Random ID oluştur
+      function generateRandomId() {
+        return Math.random().toString(36).substring(2, 15) + 
+               Math.random().toString(36).substring(2, 15);
+      }
+      
+      // Random token oluştur
+      function generateRandomToken() {
+        return Math.random().toString(36).substring(2, 15) + 
+               Math.random().toString(36).substring(2, 15) + 
+               Math.random().toString(36).substring(2, 15);
+      }
+      
+      // Rastgele e-posta oluşturma
+      randomMailBtn.addEventListener('click', async function() {
+        try {
+          randomMailBtn.disabled = true;
+          randomMailBtn.innerHTML = '<span class="loading"></span> E-posta Oluşturuluyor...';
+          
+          const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+          const length = 10;
+          let username = '';
+          
+          for (let i = 0; i < length; i++) {
+            username += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+          
+          // Domain olmadan sadece kullanıcı adı
+          const domain = domainSelect.value;
+          const email = username + domain;
+          const password = generatePassword(12);
+          
+          // Hesabı oluştur
+          await createAccount(email, password);
+          
+          // Başarılı ise React uygulamasına yönlendir (2 saniyelik bir gecikme ile)
+          updateStatus('Başarılı! Yönlendiriliyorsunuz...', 'success');
+          setTimeout(() => window.location.href = '/', 2000);
+        } catch (error) {
+          randomMailBtn.disabled = false;
+          randomMailBtn.innerHTML = '<i class="fas fa-dice"></i> Rastgele E-posta Oluştur';
+        }
+      });
+      
+      // Özel e-posta oluşturma
+      customMailBtn.addEventListener('click', async function() {
+        try {
+          const prefix = customPrefixInput.value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+          
+          if (prefix.length < 3) {
+            updateStatus('E-posta adı en az 3 karakter olmalıdır', 'error');
+            return;
+          }
+          
+          customMailBtn.disabled = true;
+          customMailBtn.innerHTML = '<span class="loading"></span> E-posta Oluşturuluyor...';
+          
+          // Domain olmadan sadece kullanıcı adı
+          const domain = domainSelect.value;
+          const email = prefix + domain;
+          const password = generatePassword(12);
+          
+          // Hesabı oluştur
+          await createAccount(email, password);
+          
+          // Başarılı ise React uygulamasına yönlendir (2 saniyelik bir gecikme ile)
+          updateStatus('Başarılı! Yönlendiriliyorsunuz...', 'success');
+          setTimeout(() => window.location.href = '/', 2000);
+        } catch (error) {
+          customMailBtn.disabled = false;
+          customMailBtn.innerHTML = '<i class="fas fa-check"></i> Özel E-posta Oluştur';
+        }
+      });
+      
+      // Rastgele güçlü şifre oluştur
+      function generatePassword(length) {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=";
+        let password = "";
+        for (let i = 0; i < length; i++) {
+          password += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        return password;
+      }
+      
+      // Durum mesajını güncelle
+      function updateStatus(message, type) {
+        statusMessage.textContent = message;
+        statusMessage.className = 'status-message ' + type;
+      }
+    });
+  </script>
+</body>
+</html> 

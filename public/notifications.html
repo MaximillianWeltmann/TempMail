@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA MAIL - Bildirimler</title>
+  <!-- CSS dosyaları -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="futuristic-layout">
+    <!-- Sol Kenar Çubuğu -->
+    <aside class="futuristic-navbar">
+      <div class="futuristic-logo">
+        <div class="flex flex-col items-center space-y-1">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl" style="box-shadow: 0 0 15px rgba(99,102,241,0.5);">
+            <i class="fas fa-rocket h-7 w-7 text-white animate-pulse"></i>
+          </div>
+          <span class="text-xl font-bold futuristic-text-gradient">NOVA MAIL</span>
+        </div>
+      </div>
+      
+      <nav class="mt-8 px-2">
+        <a href="inbox.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-envelope futuristic-nav-icon"></i>
+            <span>Gelen Kutusu</span>
+          </div>
+        </a>
+        
+        <a href="profile.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-user-astronaut futuristic-nav-icon"></i>
+            <span>Profil</span>
+          </div>
+        </a>
+
+        <a href="explore.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-globe futuristic-nav-icon"></i>
+            <span>Keşfet</span>
+          </div>
+        </a>
+
+        <a href="statistics.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-chart-bar futuristic-nav-icon"></i>
+            <span>İstatistikler</span>
+          </div>
+        </a>
+
+        <a href="notifications.html">
+          <div class="futuristic-nav-item active">
+            <i class="fas fa-bell futuristic-nav-icon"></i>
+            <span>Bildirimler</span>
+          </div>
+        </a>
+
+        <a href="settings.html">
+          <div class="futuristic-nav-item">
+            <i class="fas fa-cog futuristic-nav-icon"></i>
+            <span>Ayarlar</span>
+          </div>
+        </a>
+      </nav>
+      
+      <div class="mt-auto mb-6 px-6">
+        <div class="futuristic-card p-4 animate-fade-in">
+          <div class="text-xs text-gray-400 mb-2 flex flex-col">
+            <div class="flex items-center justify-between mb-1">
+              <span>Depolama:</span>
+              <span class="futuristic-badge">0 B / 40 MB</span>
+            </div>
+            <div class="w-full bg-black/30 rounded-full h-1.5 mt-1">
+              <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-1.5 rounded-full" style="width: 2%;"></div>
+            </div>
+          </div>
+          <div class="futuristic-divider"></div>
+          <div class="text-center text-xs text-indigo-400 mt-2">
+            © NOVA MAIL 2023
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Ana İçerik -->
+    <main class="futuristic-content">
+      <!-- Üst Bar -->
+      <div class="futuristic-header">
+        <div class="flex items-center space-x-3">
+          <div class="text-sm font-medium bg-black/20 rounded-md px-3 py-1.5 border border-indigo-500/20">
+            kullanici@nova-mail.com
+          </div>
+          <div class="futuristic-badge">
+            <i class="fas fa-rocket w-3 h-3 mr-1"></i> Premium
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button class="futuristic-icon-button" title="Yenile" id="refreshButton">
+            <i class="fas fa-sync-alt w-4 h-4 hover:rotate-180 transition-transform duration-500"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Tema Değiştir">
+            <i class="fas fa-moon w-4 h-4"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Hesabı Sil">
+            <i class="fas fa-trash w-4 h-4"></i>
+          </button>
+          
+          <button class="futuristic-icon-button" title="Çıkış">
+            <i class="fas fa-sign-out-alt w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- İçerik Alanı - Bildirimler -->
+      <div class="flex-1 overflow-auto p-6">
+        <div class="futuristic-panel">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold futuristic-text-gradient">Bildirimler</h1>
+            <div class="flex space-x-3">
+              <button class="futuristic-icon-button" title="Tümünü Okundu İşaretle">
+                <i class="fas fa-check-double w-4 h-4"></i>
+              </button>
+              <button class="futuristic-icon-button" title="Bildirimleri Filtrele">
+                <i class="fas fa-filter w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <!-- Bugün -->
+            <div>
+              <h2 class="text-sm text-gray-400 mb-2">Bugün</h2>
+              
+              <div class="futuristic-card p-4 border-l-4 border-indigo-500 animate-slide-in">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-envelope text-indigo-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Yeni bir mesaj aldınız</p>
+                      <span class="text-xs text-gray-500">10:42</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">admin@nova-mail.com adresinden "Hoşgeldin Mesajı" konulu bir mesaj aldınız.</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Mesaja Git</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="futuristic-card p-4 bg-indigo-900/5 animate-slide-in" style="animation-delay: 0.1s;">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-shield-alt text-purple-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Güvenlik</p>
+                      <span class="text-xs text-gray-500">09:15</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">Hesabınızla ilgili bir doğrulama isteği geldi.</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Ayrıntılar</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Dün -->
+            <div>
+              <h2 class="text-sm text-gray-400 mb-2">Dün</h2>
+              
+              <div class="futuristic-card p-4 bg-indigo-900/5 animate-slide-in" style="animation-delay: 0.2s;">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-tag text-green-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Özel Teklif</p>
+                      <span class="text-xs text-gray-500">18:30</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">Size özel %25 indirim kodu oluşturuldu: NOVA25</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Kullan</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="futuristic-card p-4 bg-indigo-900/5 animate-slide-in" style="animation-delay: 0.3s;">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-paper-plane text-blue-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Bülten Aboneliği</p>
+                      <span class="text-xs text-gray-500">14:22</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">Bültenimize başarıyla abone oldunuz.</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Bülten Ayarları</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Bu hafta -->
+            <div>
+              <h2 class="text-sm text-gray-400 mb-2">Bu Hafta</h2>
+              
+              <div class="futuristic-card p-4 bg-indigo-900/5 animate-slide-in" style="animation-delay: 0.4s;">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-exclamation-triangle text-red-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Güvenlik Uyarısı</p>
+                      <span class="text-xs text-gray-500">2 gün önce</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">Hesabınızla ilgili şüpheli bir giriş denemesi tespit edildi.</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Güvenlik Ayarları</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="futuristic-card p-4 bg-indigo-900/5 animate-slide-in" style="animation-delay: 0.5s;">
+                <div class="flex">
+                  <div class="h-10 w-10 bg-indigo-900/40 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-clock text-yellow-400"></i>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start">
+                      <p class="font-medium">Hesap Hatırlatması</p>
+                      <span class="text-xs text-gray-500">3 gün önce</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mt-1">Geçici hesabınız yakında sona erecek. Premium'a yükseltmek ister misiniz?</p>
+                    <div class="flex mt-2">
+                      <button class="text-xs text-indigo-400 mr-3 hover:text-indigo-300">Premium'a Yükselt</button>
+                      <button class="text-xs text-gray-500 hover:text-gray-400">Bildirimi Kapat</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript dosyaları -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Kullanıcı e-posta adresini localStorage'dan al
+      const account = JSON.parse(localStorage.getItem('novamail_account') || '{}');
+      const userEmail = account.address || 'kullanici@nova-mail.com';
+      
+      // E-posta görünen yerleri güncelle
+      document.querySelectorAll('.text-sm.font-medium.bg-black\\/20').forEach(element => {
+        element.textContent = userEmail;
+      });
+      
+      // Yenile butonuna tıklama işlevi
+      document.getElementById('refreshButton')?.addEventListener('click', function() {
+        // Animasyon efekti
+        this.querySelector('i').classList.add('animate-spin');
+        setTimeout(() => {
+          this.querySelector('i').classList.remove('animate-spin');
+          // Sayfayı yeniden yükle
+          location.reload();
+        }, 1000);
+      });
+      
+      // Çıkış butonuna tıklama işlevi
+      document.querySelector('[title="Çıkış"]')?.addEventListener('click', function() {
+        localStorage.removeItem('novamail_account');
+        window.location.href = 'signup.html';
+      });
+      
+      // Hesabı Sil butonuna tıklama işlevi
+      document.querySelector('[title="Hesabı Sil"]')?.addEventListener('click', function() {
+        if (confirm('Hesabınızı silmek istediğinize emin misiniz?')) {
+          localStorage.removeItem('novamail_account');
+          window.location.href = 'signup.html';
+        }
+      });
+      
+      // Bildirim kapama işlevi
+      document.querySelectorAll('.text-xs.text-gray-500.hover\\:text-gray-400').forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const notificationCard = this.closest('.futuristic-card');
+          if (notificationCard) {
+            notificationCard.classList.add('opacity-0');
+            setTimeout(() => {
+              notificationCard.style.height = '0px';
+              notificationCard.style.margin = '0';
+              notificationCard.style.padding = '0';
+              notificationCard.style.overflow = 'hidden';
+              setTimeout(() => {
+                notificationCard.remove();
+              }, 300);
+            }, 300);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
